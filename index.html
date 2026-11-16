@@ -1,268 +1,440 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Luiz Fernando Gutler | Automações Inteligentes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luiz Fernando Gutler | Finanças × Tecnologia</title>
+<meta name="description" content="22 anos no financeiro, construindo as ferramentas que o financeiro usa: automação com Python, n8n e IA, apps web e iniciativas próprias como OuviCaptei.">
 
-    <!-- Open Graph / LinkedIn -->
-    <meta property="og:title" content="Portfólio | Automações Inteligentes">
-    <meta property="og:description" content="Automações profissionais para reduzir erros, padronizar processos e otimizar rotinas usando Python, Excel, Power BI e e-mails automáticos.">
-    <meta property="og:image" content="https://fernandogutler.github.io/Portf-lio/lfg_flow_logo.png">
-    <meta property="og:url" content="https://fernandogutler.github.io/Portf-lio/">
-    <meta property="og:type" content="website">
+<!-- Open Graph / LinkedIn -->
+<meta property="og:title" content="Luiz Fernando Gutler | Finanças × Tecnologia">
+<meta property="og:description" content="Tesouraria, câmbio e FIDC de um lado. Python, n8n e IA do outro. No meio, processos que rodam sozinhos.">
+<meta property="og:image" content="https://fernandogutler.github.io/Portf-lio/lfg_flow_logo.png">
+<meta property="og:url" content="https://fernandogutler.github.io/Portf-lio/">
+<meta property="og:type" content="website">
 
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #0f172a;
-            color: #e5e7eb;
-            line-height: 1.7;
-        }
+<style>
+  :root{
+    --bg:#0a1019;
+    --bg-2:#0f1724;
+    --line:#1d2a3b;
+    --ink:#e8edf3;
+    --muted:#8a9bb0;
+    --dim:#5d6f86;
+    --steel:#6fb3dc;
+    --steel-deep:#2f7fb0;
+    --mint:#7fe0b4;
+    --amber:#f2c66d;
+    --serif:"Instrument Serif", Georgia, serif;
+    --sans:"Manrope", system-ui, sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* grid de fundo sutil, tipo papel milimetrado de planilha */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:56px 56px;opacity:.28;
+    mask-image:radial-gradient(ellipse 80% 60% at 70% 0%, #000 30%, transparent 75%);
+  }
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
 
-        header {
-            background: #020617;
-            padding: 60px 20px;
-            text-align: center;
-            position: relative;
-        }
+  /* NAV */
+  nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0}
+  .brand{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--muted);text-decoration:none}
+  .brand b{color:var(--steel);font-weight:500}
+  nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:14px}
+  nav ul a{text-decoration:none;color:var(--muted);transition:color .2s}
+  nav ul a:hover{color:var(--ink)}
 
-        header h1 {
-            margin: 0;
-            font-size: 2.4rem;
-            letter-spacing: 0.5px;
-        }
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;padding:70px 0 110px}
+  .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);margin:0 0 22px}
+  .kicker span{color:var(--dim)}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(48px,6.4vw,84px);line-height:.98;margin:0 0 28px;letter-spacing:-.01em}
+  h1 em{color:var(--steel);font-style:italic}
+  .lead{font-size:21px;line-height:1.5;color:var(--ink);max-width:560px;margin:0 0 14px}
+  .sub{color:var(--muted);max-width:540px;margin:0 0 34px}
+  .ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s, background .2s, border-color .2s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.primary{background:var(--steel);color:#06121c}
+  .btn.primary:hover{background:#8cc5e6}
+  .btn.ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn.ghost:hover{border-color:var(--steel)}
 
-        header p {
-            margin-top: 14px;
-            font-size: 1.15rem;
-            color: #94a3b8;
-        }
+  /* painel do fluxo */
+  .flow{
+    background:linear-gradient(180deg,var(--bg-2),#0b121d);
+    border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;
+    box-shadow:0 30px 80px -40px rgba(47,127,176,.45);
+  }
+  .flow-head{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--dim);margin-bottom:18px}
+  .flow-head .live{color:var(--mint)}
+  .flow-head .live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--mint);margin-right:7px;animation:pulse 1.6s infinite}
+  .steps{list-style:none;margin:0;padding:0;position:relative}
+  .steps::before{content:"";position:absolute;left:15px;top:14px;bottom:14px;width:1px;background:var(--line)}
+  .steps li{position:relative;display:flex;gap:16px;align-items:flex-start;padding:9px 0}
+  .dot{flex:none;width:31px;height:31px;border-radius:9px;border:1px solid var(--line);background:var(--bg);display:grid;place-items:center;font-family:var(--mono);font-size:11px;color:var(--dim);transition:all .35s;z-index:1}
+  .steps li.on .dot{border-color:var(--steel);color:var(--steel);box-shadow:0 0 0 4px rgba(111,179,220,.12)}
+  .steps li.done .dot{border-color:#2c5a46;color:var(--mint)}
+  .steps b{display:block;font-size:14.5px;font-weight:600}
+  .steps small{display:block;font-family:var(--mono);font-size:11.5px;color:var(--dim)}
+  .log{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--muted);min-height:20px}
+  .log i{color:var(--mint);font-style:normal}
+  @keyframes pulse{50%{opacity:.35}}
 
-        .logo {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 95px;
-        }
+  /* SECTIONS */
+  section{padding:96px 0;border-top:1px solid var(--line)}
+  .sec-head{display:grid;grid-template-columns:200px 1fr;gap:40px;margin-bottom:52px}
+  .sec-num{font-family:var(--mono);font-size:12.5px;color:var(--steel);letter-spacing:.1em;padding-top:12px}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,50px);line-height:1.05;margin:0 0 14px}
+  h2 em{color:var(--steel)}
+  .sec-intro{color:var(--muted);max-width:620px;margin:0}
 
-        section {
-            max-width: 1000px;
-            margin: auto;
-            padding: 55px 20px;
-        }
+  /* perfil */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .col{border:1px solid var(--line);border-radius:16px;padding:30px;background:rgba(15,23,36,.6)}
+  .col h3{font-family:var(--mono);font-weight:500;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 20px}
+  .col ul{list-style:none;margin:0;padding:0}
+  .col li{padding:14px 0;border-top:1px solid var(--line)}
+  .col li:first-child{border-top:0;padding-top:0}
+  .col li b{display:block;font-weight:600}
+  .col li span{color:var(--muted);font-size:15px}
+  .stat{display:flex;align-items:baseline;gap:14px;margin-top:26px}
+  .stat strong{font-family:var(--serif);font-size:64px;font-weight:400;line-height:1;color:var(--steel)}
+  .stat span{color:var(--muted);font-size:15px;max-width:220px}
 
-        h2 {
-            border-bottom: 1px solid #1e293b;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-            color: #f8fafc;
-            font-size: 1.6rem;
-        }
+  /* cases */
+  .cases{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+  .case{grid-column:span 2;border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--bg-2);display:flex;flex-direction:column;transition:border-color .2s, transform .2s}
+  .case:hover{border-color:#2d4560;transform:translateY(-2px)}
+  .case.wide{grid-column:span 3}
+  .case .tag{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+  .case h3{font-size:20px;font-weight:700;margin:0 0 10px;line-height:1.3}
+  .case p{color:var(--muted);font-size:15.5px;margin:0 0 18px}
+  .case .before{font-size:14px;color:var(--muted);border-left:2px solid var(--amber);padding-left:12px;margin:0 0 18px}
+  .case .before b{color:var(--amber);font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}
+  .chip{font-family:var(--mono);font-size:11.5px;padding:5px 10px;border-radius:6px;background:#132033;color:#b6cbe0;border:1px solid #1b2c42}
+  .note{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:26px}
 
-        .card {
-            background: #020617;
-            border: 1px solid #1e293b;
-            border-radius: 10px;
-            padding: 28px;
-            margin-bottom: 28px;
-        }
+  /* produtos */
+  .products{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .product{position:relative;border-radius:20px;padding:34px;border:1px solid var(--line);overflow:hidden;background:var(--bg-2)}
+  .product::after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;right:-120px;top:-140px;filter:blur(60px);opacity:.35}
+  .product.a::after{background:var(--steel-deep)}
+  .product.b::after{background:#3c7a63}
+  .status{display:inline-block;font-family:var(--mono);font-size:11px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-bottom:22px}
+  .status::before{content:"● ";color:var(--amber)}
+  .product h3{font-family:var(--serif);font-weight:400;font-size:42px;margin:0 0 6px;line-height:1}
+  .product .tagline{color:var(--steel);font-size:16px;margin:0 0 20px}
+  .product.b .tagline{color:var(--mint)}
+  .product p{color:var(--muted);font-size:15.5px}
+  .pipe{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;margin:22px 0 24px}
+  .pipe span{padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+  .pipe i{color:var(--dim);font-style:normal}
 
-        .card h3 {
-            margin-top: 0;
-            color: #38bdf8;
-            font-size: 1.3rem;
-        }
+  /* método */
+  .method{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .method div{padding:28px 24px;border-left:1px solid var(--line);background:rgba(15,23,36,.5)}
+  .method div:first-child{border-left:0}
+  .method .n{font-family:var(--serif);font-size:44px;color:var(--steel);line-height:1;margin-bottom:16px}
+  .method b{display:block;font-size:17px;margin-bottom:8px}
+  .method p{color:var(--muted);font-size:15px;margin:0}
 
-        .card p {
-            margin-bottom: 12px;
-            color: #cbd5f5;
-        }
+  /* stack */
+  .stack{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .stack h4{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  .stack ul{list-style:none;margin:0;padding:0}
+  .stack li{padding:5px 0;font-size:15.5px}
 
-        .tech {
-            display: inline-block;
-            background: #1e293b;
-            color: #e5e7eb;
-            padding: 7px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin: 6px 6px 0 0;
-        }
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:70px 0 50px}
+  .closing{font-family:var(--serif);font-size:clamp(30px,3.6vw,46px);line-height:1.15;max-width:760px;margin:0 0 34px}
+  .closing em{color:var(--steel)}
+  .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;font-size:13.5px;color:var(--dim);margin-top:56px;padding-top:24px;border-top:1px solid var(--line)}
+  .foot b{color:var(--ink);font-weight:600}
 
-        footer {
-            background: #020617;
-            text-align: center;
-            padding: 28px;
-            font-size: 0.9rem;
-            color: #64748b;
-        }
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
 
-        footer strong {
-            color: #e5e7eb;
-        }
-    </style>
+  @media (max-width:900px){
+    nav ul{display:none}
+    .hero{grid-template-columns:1fr;padding:30px 0 80px;gap:44px}
+    .sec-head{grid-template-columns:1fr;gap:6px}
+    .two,.products{grid-template-columns:1fr}
+    .cases{grid-template-columns:1fr}
+    .case,.case.wide{grid-column:auto}
+    .method{grid-template-columns:1fr 1fr}
+    .method div:nth-child(3){border-left:0}
+    .method div:nth-child(n+3){border-top:1px solid var(--line)}
+    .stack{grid-template-columns:1fr 1fr}
+    section{padding:72px 0}
+  }
+  @media (max-width:520px){
+    body{font-size:16px}
+    .method{grid-template-columns:1fr}
+    .method div{border-left:0;border-top:1px solid var(--line)}
+    .method div:first-child{border-top:0}
+    .product{padding:26px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
 </head>
-
 <body>
 
-<header>
-    <img src="lfg_flow_logo.png" alt="LFG Flow" class="logo">
-    <h1>Luiz Fernando Gutler</h1>
-    <p>Automações Inteligentes • Redução de Erros • Padronização de Processos</p>
-</header>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#"><b>LFG</b> Flow / Luiz Fernando Gutler</a>
+    <ul>
+      <li><a href="#perfil">Perfil</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#iniciativas">Iniciativas</a></li>
+      <li><a href="#metodo">Como construo</a></li>
+    </ul>
+  </nav>
 
-<section>
-    <h2>O que você vai encontrar aqui</h2>
-
-    <p>
-        Este portfólio apresenta soluções criadas para eliminar tarefas manuais,
-        repetitivas e sujeitas a erro, comuns no dia a dia profissional.
-    </p>
-
-    <p>
-        Na prática, são sistemas que fazem sozinhos aquilo que normalmente exigiria
-        abrir planilhas, conferir informações, montar e-mails e enviar mensagens manualmente.
-    </p>
-
-    <p>
-        O objetivo é simples: menos erro humano, menos retrabalho e mais tempo
-        para análise e tomada de decisão.
-    </p>
-</section>
-
-<section>
-    <h2>Como essas automações funcionam</h2>
-
-    <div class="card">
-        <h3>Automações com Python</h3>
-        <p>
-            Em vez de uma pessoa executar cada etapa manualmente, o sistema faz isso automaticamente.
-        </p>
-        <p>
-            Ele lê os dados, aplica regras, confere informações, identifica exceções
-            e executa as ações necessárias, sempre da mesma forma.
-        </p>
-        <p>
-            O resultado é um processo mais rápido, confiável e previsível.
-        </p>
-        <span class="tech">Python</span>
+  <header class="hero">
+    <div>
+      <p class="kicker">Finanças <span>×</span> Tecnologia <span>·</span> São Paulo</p>
+      <h1>Luiz Fernando<br><em>Gutler</em></h1>
+      <p class="lead">22 anos no financeiro. Hoje eu também construo as ferramentas que o financeiro usa.</p>
+      <p class="sub">Tesouraria, câmbio e FIDC de um lado. Python, n8n e IA do outro. No meio, processos que rodam sozinhos, com menos erro humano, menos retrabalho e mais tempo para decidir.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#projetos">Ver o que já construí →</a>
+        <a class="btn ghost" href="https://github.com/FernandoGutler" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
 
-    <div class="card">
-        <h3>Excel automatizado e painéis visuais</h3>
-        <p>
-            As planilhas deixam de ser apenas arquivos de edição manual
-            e passam a funcionar como uma base organizada de informações.
-        </p>
-        <p>
-            Esses dados alimentam painéis visuais, permitindo acompanhar números,
-            status e indicadores sem precisar ajustar nada manualmente.
-        </p>
-        <span class="tech">Excel automatizado</span>
-        <span class="tech">Power BI</span>
+    <div class="flow" aria-label="Exemplo de fluxo automatizado">
+      <div class="flow-head"><span>fluxo: custo_financeiro.run</span><span class="live">rodando</span></div>
+      <ol class="steps" id="steps">
+        <li><div class="dot">01</div><div><b>Chega o e-mail do banco</b><small>outlook / gmail</small></div></li>
+        <li><div class="dot">02</div><div><b>Python + n8n leem e validam</b><small>regras, exceções, conferência</small></div></li>
+        <li><div class="dot">03</div><div><b>IA interpreta e classifica</b><small>llm → json estruturado</small></div></li>
+        <li><div class="dot">04</div><div><b>Banco de dados, planilha e BI atualizados</b><small>supabase · excel · power bi</small></div></li>
+        <li><div class="dot">05</div><div><b>Análise e decisão</b><small>tempo humano onde importa</small></div></li>
+      </ol>
+      <div class="log" id="log">&gt; aguardando gatilho…</div>
+    </div>
+  </header>
+</div>
+
+<!-- 01 PERFIL -->
+<section id="perfil">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">01 / PERFIL</div>
+      <div>
+        <h2>Quem entende o problema <em>e</em> escreve a solução.</h2>
+        <p class="sec-intro">A maior parte das ferramentas financeiras é feita por quem nunca fechou um câmbio ou conciliou uma carteira. Eu faço o caminho contrário: parto da rotina real e transformo em sistema.</p>
+      </div>
     </div>
 
-    <div class="card">
-        <h3>Envio automático de e-mails</h3>
-        <p>
-            O sistema identifica quando uma comunicação precisa ser enviada
-            e faz isso sozinho.
-        </p>
-        <p>
-            O e-mail já sai com texto padronizado, tabelas organizadas,
-            anexos corretos e identidade visual com logotipo.
-        </p>
-        <p>
-            Isso evita esquecimentos, mensagens diferentes para pessoas diferentes
-            e erros de envio.
-        </p>
-        <span class="tech">Automação de e-mails</span>
-        <span class="tech">HTML com identidade visual</span>
+    <div class="two">
+      <div class="col reveal">
+        <h3>Do financeiro</h3>
+        <ul>
+          <li><b>Tesouraria e fluxo de caixa</b><span>Projeção, liquidez, conciliação e relacionamento com bancos</span></li>
+          <li><b>Câmbio e trade finance</b><span>Operações de importação, risco cambial, tributos e custo financeiro por processo</span></li>
+          <li><b>Crédito e due diligence</b><span>Análise de risco e relatórios para comitê de crédito</span></li>
+          <li><b>Estruturação e FIDC</b><span>Gestão de fundo de recebíveis, conciliação de carteira e interface com gestora e administradora</span></li>
+        </ul>
+        <div class="stat"><strong>22+</strong><span>anos de experiência na área financeira</span></div>
+      </div>
+      <div class="col reveal">
+        <h3>Da tecnologia</h3>
+        <ul>
+          <li><b>Automação com Python</b><span>Leitura de e-mails, lançamentos, conciliações e relatórios sem intervenção manual</span></li>
+          <li><b>Workflows com n8n e IA</b><span>Orquestração de processos com LLMs (Claude, OpenAI) interpretando dados</span></li>
+          <li><b>Apps web completos</b><span>Backend em FastAPI, frontend em JavaScript/Next.js, banco Supabase/PostgreSQL</span></li>
+          <li><b>Integrações via API</b><span>Banco Central, Receita Federal, Serasa, ERP e serviços em nuvem</span></li>
+        </ul>
+        <div class="stat"><strong>∞</strong><span>tarefas repetitivas que não precisam mais de alguém apertando botão</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 PROJETOS -->
+<section id="projetos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">02 / NO DIA A DIA</div>
+      <div>
+        <h2>O que já está <em>rodando</em>.</h2>
+        <p class="sec-intro">Soluções construídas para a rotina financeira corporativa, todas em uso real.</p>
+      </div>
     </div>
 
-    <div class="card">
-        <h3>Planilhas integradas aos processos</h3>
-        <p>
-            Muitas rotinas começam em planilhas.
-            Aqui, elas são usadas como ponto de partida para o sistema saber o que fazer.
-        </p>
-        <p>
-            A partir desses dados, o processo segue automaticamente:
-            valida informações, organiza dados, envia comunicações
-            e atualiza relatórios.
-        </p>
-        <span class="tech">Planilhas estruturadas</span>
-        <span class="tech">Integração com BI</span>
+    <div class="cases">
+      <article class="case wide reveal">
+        <div class="tag">Aplicação web · Tesouraria</div>
+        <h3>Sistema de fluxo de caixa com custo financeiro</h3>
+        <p class="before"><b>Antes:</b> previsões espalhadas em planilhas e juros calculados na mão, processo por processo.</p>
+        <p>Sistema web com previsões, cadastro de clientes, condições de pagamento e cálculo automático de vencimentos. O módulo de custo financeiro busca taxas históricas no Banco Central e na Receita Federal, puxa dados do ERP e gera o relatório em Excel com fórmulas.</p>
+        <div class="chips"><span class="chip">FastAPI</span><span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">JavaScript</span><span class="chip">API BCB</span></div>
+      </article>
+
+      <article class="case wide reveal">
+        <div class="tag">n8n + IA · Custos</div>
+        <h3>Leitura inteligente de e-mails financeiros</h3>
+        <p class="before"><b>Antes:</b> abrir cada e-mail, copiar valores e montar a planilha manualmente.</p>
+        <p>Workflow que recebe e-mails de custo financeiro, usa um LLM para interpretar o conteúdo e entrega tudo estruturado numa planilha, pronto para análise.</p>
+        <div class="chips"><span class="chip">n8n</span><span class="chip">Claude API</span><span class="chip">Google Sheets</span></div>
+      </article>
+
+      <article class="case reveal">
+        <div class="tag">Desktop · Operações</div>
+        <h3>Super App de registros</h3>
+        <p>Aplicativo com módulos que leem e-mails do Outlook, fazem lançamentos financeiros e preenchem planilhas sozinhos.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Tkinter</span><span class="chip">win32com</span></div>
+      </article>
+
+      <article class="case reveal">
+        <div class="tag">Comunicação</div>
+        <h3>E-mails automáticos com identidade visual</h3>
+        <p>O sistema identifica quando avisar, monta o texto padronizado com tabelas e anexos corretos e envia com logotipo.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">HTML</span><span class="chip">pandas</span></div>
+      </article>
+
+      <article class="case reveal">
+        <div class="tag">Crédito · Controle</div>
+        <h3>Consultas e conciliações</h3>
+        <p>Consultas de crédito via API, conciliação de contas a receber e painéis que se atualizam sem ajuste manual.</p>
+        <div class="chips"><span class="chip">API Serasa</span><span class="chip">openpyxl</span><span class="chip">Power BI</span></div>
+      </article>
     </div>
+    <p class="note">// Soluções de uso interno corporativo. Nenhum código ou dado sensível é exposto publicamente.</p>
+  </div>
 </section>
 
-<section>
-    <h2>Tecnologias utilizadas</h2>
+<!-- 03 INICIATIVAS -->
+<section id="iniciativas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">03 / LFG FLOW</div>
+      <div>
+        <h2>Iniciativas <em>próprias</em>.</h2>
+        <p class="sec-intro">Produtos que eu desenho, construo e publico do zero, com IA no centro e pensados para o mercado brasileiro.</p>
+      </div>
+    </div>
 
-    <p>
-        As soluções são construídas com tecnologias consolidadas,
-        priorizando estabilidade, segurança e facilidade de uso.
-    </p>
+    <div class="products">
+      <article class="product a reveal">
+        <span class="status">Em desenvolvimento</span>
+        <h3>OuviCaptei</h3>
+        <p class="tagline">Você fala, a IA organiza.</p>
+        <p>App de transcrição de áudio com análise por IA. Grava ou recebe reuniões, palestras e conversas, transcreve e devolve resumo, pontos-chave e próximos passos.</p>
+        <div class="pipe"><span>áudio</span><i>→</i><span>whisper</span><i>→</i><span>llm</span><i>→</i><span>resumo + ações</span></div>
+        <p>Começou como um transcritor desktop, virou aplicação web e hoje é um PWA que funciona no celular e no computador.</p>
+        <div class="chips"><span class="chip">PWA</span><span class="chip">FastAPI</span><span class="chip">faster-whisper</span><span class="chip">Claude API</span></div>
+      </article>
 
-    <span class="tech">Python</span>
-    <span class="tech">Interfaces gráficas (Tkinter / ttkbootstrap)</span>
-    <span class="tech">pandas</span>
-    <span class="tech">openpyxl</span>
-    <span class="tech">Automação de e-mails</span>
-    <span class="tech">HTML para mensagens</span>
+      <article class="product b reveal">
+        <span class="status">Em construção</span>
+        <h3>Jornal autônomo</h3>
+        <p class="tagline">Notícias de tecnologia escritas e traduzidas por IA.</p>
+        <p>Site de notícias em que a IA faz todo o processo: busca as fontes todo dia, filtra o que importa, redige a matéria e publica. Funciona em inglês e português, e outros idiomas são traduzidos na hora e guardados em cache.</p>
+        <div class="pipe"><span>rss</span><i>→</i><span>n8n</span><i>→</i><span>llm</span><i>→</i><span>supabase</span><i>→</i><span>next.js</span></div>
+        <p>Construído com foco em segurança (RLS desde o início) e custo baixo de operação.</p>
+        <div class="chips"><span class="chip">Next.js</span><span class="chip">Vercel</span><span class="chip">Supabase</span><span class="chip">n8n</span><span class="chip">LLMs</span></div>
+      </article>
+    </div>
+  </div>
 </section>
 
-<section>
-    <h2>Integrações e APIs</h2>
-
-    <p>
-        Quando necessário, as automações se conectam a sistemas externos
-        para buscar ou validar informações automaticamente.
-    </p>
-
-    <p>
-        Isso elimina consultas manuais e garante que os dados utilizados
-        estejam sempre atualizados.
-    </p>
-
-    <span class="tech">APIs REST</span>
-    <span class="tech">API Serasa</span>
-    <span class="tech">Integração com sistemas</span>
+<!-- 04 METODO -->
+<section id="metodo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">04 / COMO CONSTRUO</div>
+      <div>
+        <h2>Visão de quem <em>constrói</em> app.</h2>
+        <p class="sec-intro">Não começo pela tecnologia. Começo pelo retrabalho que alguém faz toda semana.</p>
+      </div>
+    </div>
+    <div class="method reveal">
+      <div><div class="n">1</div><b>Achar o gargalo</b><p>Onde está o erro manual, a planilha copiada e o e-mail esquecido.</p></div>
+      <div><div class="n">2</div><b>Desenhar o fluxo</b><p>De onde vem o dado, que regra se aplica e para onde ele vai.</p></div>
+      <div><div class="n">3</div><b>Construir pequeno</b><p>Versão funcional testada com dado real antes de crescer.</p></div>
+      <div><div class="n">4</div><b>Evoluir sem refazer</b><p>Do local para a nuvem, de um usuário para vários, com a mesma base.</p></div>
+    </div>
+  </div>
 </section>
 
-<section>
-    <h2>Segurança e evolução</h2>
-
-    <p>
-        As aplicações funcionam localmente, com controle de acesso
-        e foco na segurança das informações.
-    </p>
-
-    <p>
-        Os projetos já são pensados para evoluir,
-        permitindo no futuro integrações com nuvem,
-        WhatsApp e automações orquestradas via n8n,
-        sem precisar refazer todo o sistema.
-    </p>
-
-    <span class="tech">Aplicações locais</span>
-    <span class="tech">Segurança de dados</span>
-    <span class="tech">Nuvem (em evolução)</span>
-    <span class="tech">WhatsApp</span>
-    <span class="tech">n8n</span>
+<!-- 05 STACK -->
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">05 / STACK</div>
+      <div><h2>Ferramentas.</h2></div>
+    </div>
+    <div class="stack reveal">
+      <div><h4>Linguagens</h4><ul><li>Python</li><li>JavaScript</li><li>SQL</li><li>HTML / CSS</li></ul></div>
+      <div><h4>Backend e dados</h4><ul><li>FastAPI</li><li>Supabase / PostgreSQL</li><li>pandas · openpyxl</li><li>APIs REST</li></ul></div>
+      <div><h4>Automação e IA</h4><ul><li>n8n</li><li>Claude API</li><li>OpenAI</li><li>Whisper</li></ul></div>
+      <div><h4>Front e análise</h4><ul><li>Next.js · Vercel</li><li>Tkinter / ttkbootstrap</li><li>Excel avançado</li><li>Power BI</li></ul></div>
+    </div>
+  </div>
 </section>
 
 <footer>
-    <strong>LFG Flow</strong> — automação aplicada ao dia a dia profissional.<br>
-    © Luiz Fernando Gutler<br>
-    Soluções desenvolvidas para uso interno corporativo. Nenhum código ou dado sensível é disponibilizado publicamente.
+  <div class="wrap">
+    <p class="closing">Menos erro humano, menos retrabalho e <em>mais tempo para análise e decisão.</em></p>
+    <div class="foot">
+      <span><b>LFG Flow</b>: gestão leve, entrega certeira.</span>
+      <span>© Luiz Fernando Gutler</span>
+    </div>
+  </div>
 </footer>
 
+<script>
+  // animação do fluxo no hero
+  (function(){
+    const items=[...document.querySelectorAll('#steps li')];
+    const log=document.getElementById('log');
+    const msgs=[
+      '> e-mail recebido: extrato_cdi.pdf',
+      '> 14 linhas validadas · 0 exceções',
+      '> llm: categoria=custo_financeiro <i>ok</i>',
+      '> planilha e painel atualizados <i>ok</i>',
+      '> pronto para análise <i>✓</i>'
+    ];
+    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce){items.forEach(li=>li.classList.add('done'));log.innerHTML=msgs[4];return;}
+    let i=0;
+    function tick(){
+      items.forEach((li,k)=>{li.classList.toggle('done',k<i);li.classList.toggle('on',k===i);});
+      log.innerHTML=msgs[i];
+      i++;
+      if(i>items.length){setTimeout(()=>{i=0;items.forEach(li=>li.classList.remove('done','on'));log.innerHTML='&gt; aguardando gatilho…';setTimeout(tick,900);},2200);}
+      else setTimeout(tick,1300);
+    }
+    setTimeout(tick,700);
+  })();
+
+  // revelar seções ao rolar
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
-
-
-
